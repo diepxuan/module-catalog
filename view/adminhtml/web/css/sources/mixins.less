@@ -1,0 +1,151 @@
+/* --- Custom Mixins --- */
+.box-sizing(@box){
+  -webkit-box-sizing: @box;
+     -moz-box-sizing: @box;
+          box-sizing: @box;
+}
+.box-shadow(@shadow) {
+  -webkit-box-shadow: @shadow;
+     -moz-box-shadow: @shadow;
+          box-shadow: @shadow;
+}
+.drop-shadow (@x: 0, @y: 1px, @blur: 2px, @spread: 0, @alpha: 0.25) {
+  -webkit-box-shadow: @x @y @blur @spread rgba(0, 0, 0, @alpha);
+     -moz-box-shadow: @x @y @blur @spread rgba(0, 0, 0, @alpha);
+          box-shadow: @x @y @blur @spread rgba(0, 0, 0, @alpha);
+}
+.border-radius(@radius: 0) {
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+          border-radius: @radius;
+
+  -webkit-background-clip: padding-box;
+     -moz-background-clip: padding;
+          background-clip: padding-box;
+}
+.border-radiuses (@topright: 0, @bottomright: 0, @bottomleft: 0, @topleft: 0) {
+  -webkit-border-bottom-right-radius: @bottomright;
+      -moz-border-radius-bottomright: @bottomright;
+          border-bottom-right-radius: @bottomright;
+
+  -webkit-border-top-right-radius:    @topright;
+      -moz-border-radius-topright:    @topright;
+          border-top-right-radius:    @topright;
+
+  -webkit-border-bottom-left-radius:  @bottomleft;
+      -moz-border-radius-bottomleft:  @bottomleft;
+          border-bottom-left-radius:  @bottomleft;
+
+  -webkit-border-top-left-radius:     @topleft;
+      -moz-border-radius-topleft:     @topleft;
+          border-top-left-radius:     @topleft;
+
+  -moz-background-clip:    padding;
+  -webkit-background-clip: padding-box;
+  background-clip:         padding-box;
+}
+.css-animation(@animation){
+  -webkit-animation: @animation;
+     -moz-animation: @animation;
+      -ms-animation: @animation;
+       -o-animation: @animation;
+          animation: @animation;
+}
+.css-animation-delay(@delay: 0s) {
+  -webkit-animation-delay: @delay;
+     -moz-animation-delay: @delay;
+      -ms-animation-delay: @delay;
+          animation-delay: @delay;
+}
+.css-transition(@property: all .4s ease-in-out){
+  -webkit-transition: @property;
+     -moz-transition: @property;
+       -o-transition: @property;
+          transition: @property;
+}
+.css-transition-duration(@duration: 0.2s) {
+  -webkit-transition-duration: @duration;
+     -moz-transition-duration: @duration;
+      -ms-transition-duration: @duration;
+       -o-transition-duration: @duration;
+          transition-duration: @duration;
+}
+.css-transform(@value) {
+  -webkit-transform: @value;
+     -moz-transform: @value;
+      -ms-transform: @value;
+       -o-transform: @value;
+          transform: @value;
+}
+.css-opacity(@opacity:100){
+  -ms-filter: ~"progid:DXImageTransform.Microsoft.Alpha(Opacity="@opacity~")";
+      filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=@opacity);
+     opacity: @opacity/100;
+}
+.css-blur(@value) {
+  -webkit-filter: blur(@value);
+     -moz-filter: blur(@value);
+       -o-filter: blur(@value);
+      -ms-filter: blur(@value);
+          filter: blur(@value);
+}
+.css-backface-visibility(@visibility: hidden) {
+  -webkit-backface-visibility: @visibility;
+     -moz-backface-visibility: @visibility;
+      -ms-backface-visibility: @visibility;
+          backface-visibility: @visibility;
+}
+.select-appearance(@appearance: none) {
+  -webkit-appearance: @appearance;
+     -moz-appearance: @appearance;
+          appearance: @appearance;
+}
+.css-appearance(@appearance: none) {
+  .select-appearance(@appearance);
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    .select-appearance(@appearance);
+  }
+}
+
+.css-calc(@prop, @condition) {
+  @{prop}: calc(@condition);
+  @{prop}: -o-calc(@condition);
+  @{prop}: -moz-calc(@condition);
+  @{prop}: -webkit-calc(@condition);
+}
+.css-text-align(@align: center) {
+               text-align: @align;
+          text-align-last: @align; /* IE */
+     -moz-text-align-last: @align;
+  -webkit-text-align-last: @align; /* not implemented yet, and will not be */
+}
+.css-scale (@factor) {
+  -webkit-transform: scale(@factor);
+     -moz-transform: scale(@factor);
+      -ms-transform: scale(@factor);
+       -o-transform: scale(@factor);
+          transform: scale(@factor);
+}
+.css-rotate (@factor) {
+  -webkit-transform: rotate(@factor);
+     -moz-transform: rotate(@factor);
+      -ms-transform: rotate(@factor);
+       -o-transform: rotate(@factor);
+          transform: rotate(@factor);
+}
+.css-grayscale (@value: 1) {
+  -webkit-filter: grayscale(@value);
+     -moz-filter: grayscale(@value);
+       -o-filter: grayscale(@value);
+      -ms-filter: grayscale(@value);
+          filter: grayscale(@value);
+}
+.linear-gradient(@direction, @bgColor, @gradientColor) {
+  background: @bgColor; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(@direction, @gradientColor); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(@direction, @gradientColor); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(@direction, @gradientColor); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(@direction, @gradientColor); /* Standard syntax */
+}

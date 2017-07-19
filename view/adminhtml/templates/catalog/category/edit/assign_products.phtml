@@ -1,0 +1,42 @@
+<div class="evolveretail-merchandiser">
+	<div class="evolve-retail-top-action">
+		<ul>
+			<li><button id="reindexAllProduct" ><span>Set position for all product</span></button></li>
+		</ul>
+	</div>
+	<div class="merchandiser-content">
+		<?php $collections = $block->getCollectionProducts(); ?>
+		<?php if ( $collections AND $collections->getSize() ) : ?>
+			<ul id="evolve-merchandiser" class="ui-sortable">
+			<?php $i=0; ?>
+			<?php foreach ($collections as $key => $item) : ?>
+				<li class="ui-sortable-handle evol-merchan-item" data-id="<?php echo $item->getEntityId()?>" data-index="<?php echo $i++;?>" data-old="<?php echo $item->getCatIndexPosition()?>" data-new="<?php echo $item->getCatIndexPosition()?>">
+					<div class="item">
+						<div class="position"><input type="text" name="merchandiser_item_position" class="merchandiser_item_position" value="<?php echo $item->getCatIndexPosition()?>"></div>
+						<div class="image"><img src="<?php echo $block->getImage($item)?>" alt=""></div>
+						<div class="info">
+							<h3><?php echo $item->getName() ?></h3>
+						</div>
+					</div>
+				</li>
+			<?php endforeach; ?>
+			</ul>
+            <input type="hidden" name="merchandiser_category_products" id="merchandiser_in_category_products" data-form-part="category_form" value="" />
+			<script type="text/javascript">
+				require.config({
+					deps: ['jquery', 'Diepxuan_Catalog_Dragula', 'Diepxuan_Catalog_Main'],
+            		callback: function ($, dragula, evolMerchandiser) {
+            			'use strict';
+            			$('#evolve-merchandiser').evolMerchandiser(dragula, {
+            				updatePositionAction: "<?php echo $block->getUrl('diepxuan_catalog/product/updatePosition')?>",
+            				reindexAllAction: "<?php echo $block->getUrl('diepxuan_catalog/product/reindexall')?>",
+            				buttonReindex: '#reindexAllProduct',
+            				cateID: <?php echo $block->getCategoryId()?>,
+            				form_key: "<?php echo $block->getFormKey()?>"
+            			});
+            		}
+				});
+			</script>
+		<?php endif ?>
+	</div>
+</div>

@@ -1,0 +1,208 @@
+@import 'sources/mixins.less';
+@overlay-loading-bg: #000000;
+@bg-color-label-postion: #009688;
+@bg-button-reindex-all-product: #ff5722;
+@color-button-reindex-all-product: rgba(255, 255, 255, 0.84);
+
+.evolveretail-merchandiser {
+	.evolve-retail-top-action {
+		ul {
+			list-style: none;
+			#reindexAllProduct {
+				.border-radius(2px);
+				.css-transition(box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1) 0s);
+				.css-transition(background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0s);
+				.css-transition(color 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0s);
+				background-color: @bg-button-reindex-all-product;
+				border: medium none;
+			    cursor: pointer;
+			    color: @color-button-reindex-all-product;
+			    font-size: 14px;
+			    font-weight: 500;
+			    letter-spacing: 0;
+			    margin: 10px 1px;
+			    outline: 0 none;
+			    padding: 8px 30px;
+			    position: relative;
+			    text-decoration: none;
+			    text-transform: uppercase;
+			    will-change: box-shadow, transform;
+			}
+		}
+	}
+	.merchandiser-content {
+		#evolve-merchandiser {
+			list-style: none;
+			li {
+				clear: left;
+				cursor: move;
+				display: inline-block;
+				padding-left: 15px;
+				padding-right: 15px;
+				margin-bottom: 15px;
+				text-align: center;
+				vertical-align: top;
+				width: calc(~"25% - 4px");
+				&:nth-of-type(4n + 4) {
+					clear: right;
+				}
+				.item {
+					border: 1px solid #ddd;
+    				padding: 10px;
+    				position: relative;
+				}
+				.position {
+					position: absolute;
+					top: 10px;
+					right: 8px;
+					z-index: 9;
+					label {
+						background-color: @bg-color-label-postion;
+    					color: rgba(255, 255, 255, 0.84);
+    					font-size: 13px;
+    					padding: 2px 8px;
+					}
+
+                    .merchandiser_item_position {
+                        background: #009688;
+                        border: 1px solid #009688;
+                        color: rgba(255,255,255,0.84);
+                        font-size: 12px;
+                        height: 22px;
+                        text-align: center;
+                        width: 40px;
+                    }
+				}
+				.image {
+					max-width: 100%;
+					min-height: 50px;
+					min-width: 150px;
+					width: auto;
+				}
+				.info {
+					h3 {
+						font-size: 14px;
+						font-weight: 400;
+					}
+				}
+			}
+		}
+	}
+}
+.loading-wrapper {
+	bottom: 0;
+    display: inline-block;
+    height: auto;
+    left: 0;
+    position: fixed;
+    right: 0;
+    text-align: center;
+    top: 0;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: auto;
+    z-index: 9999;
+    &::before {
+    	content: "";
+    	display: inline-block;
+    	vertical-align: middle;
+    	height: 100%;
+		width: 1px;
+    }
+    &::after {
+    	.css-opacity(60);
+    	background-color: @overlay-loading-bg;
+    	content: "";
+    	position: absolute;
+    	top: 0px;
+    	left: 0px;
+    	height: 100%;
+    	width: 100%;
+    	z-index: 1;
+    }
+    .popup {
+    	display: inline-block;
+    	position: relative;
+    	vertical-align: middle;
+    	white-space: normal;
+    	width: 100%;
+    	z-index: 5;
+    }
+	.spinner {
+		width: 60px;
+		height: 60px;
+		background: #eee;
+		border-radius: 50%;
+		position: relative;
+		margin: 50px;
+		display: inline-block;
+		&:after, &:before {
+		    content: '';
+		    display: block;
+		    width: 68px;
+		    height: 68px;
+		    border-radius: 50%;
+		}
+		&.spinner-1 {
+			&::after {
+				position: absolute;
+				top: -4px;
+				left: -4px;
+				border: 4px solid transparent;
+				border-top-color: orangered;
+				border-bottom-color: orangered;
+				animation: spinny 1s linear infinite;
+			}
+		}
+	}
+}
+.evol-merchan-item {
+	clear: left;
+	display: inline-block;
+	padding-left: 15px;
+	padding-right: 15px;
+	margin-bottom: 15px;
+	list-style: none;
+	text-align: center;
+	vertical-align: top;
+	width: 24%;
+	&:nth-of-type(4n+1) {
+		clear: both;
+	}
+	.item {
+		border: 1px solid #ddd;
+		padding: 10px;
+		position: relative;
+	}
+	.position {
+		position: absolute;
+		top: 10px;
+		right: 8px;
+		z-index: 9;
+		label {
+			background-color: @bg-color-label-postion;
+			color: rgba(255, 255, 255, 0.84);
+			font-size: 13px;
+			padding: 2px 8px;
+		}
+	}
+	.info {
+		h3 {
+			font-size: 14px;
+			font-weight: 400;
+			height: 32px;
+			line-height: 16px;
+		}
+	}
+}
+@keyframes spinny{
+	0% {
+		transform: rotate(0deg) scale(1);
+	}
+	50% {
+		transform: rotate(45deg) scale(1.2);
+	}
+	100% {
+		transform: rotate(360deg) scale(1);
+	}
+}
