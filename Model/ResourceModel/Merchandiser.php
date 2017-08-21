@@ -1,12 +1,12 @@
 <?php
-namespace Diepxuan\Catalog\Model\ResourceModel;
 
-use \Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+namespace Diepxuan\Catalog\Model\ResourceModel;
 
 /**
  * Department post mysql resource
  */
-class Merchandiser extends AbstractDb {
+class Merchandiser extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
+{
 
     /**
      * Initialize resource model

@@ -1,24 +1,38 @@
 <?php
+
 namespace Diepxuan\Catalog\Observer;
 
-use \Magento\Framework\Event\ObserverInterface;
-
-class CatalogProductPosition implements ObserverInterface
+class CatalogProductPosition implements \Magento\Framework\Event\ObserverInterface
 {
     /**
-     * execute
-     * @param  \Magento\Framework\Event\Observer $observer
-     * @return null
+     * @var \Magento\Framework\Json\Helper\Data
+     */
+    protected $_jsonHelper;
+
+    public function __construct(\Magento\Framework\Json\Helper\Data $jsonHelper)
+    {
+        $this->_jsonHelper = $jsonHelper;
+    }
+
+    /**
+     * @param \Magento\Framework\Event\Observer $observer
+     * @return void
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
-        $post = $observer->getRequest()->getPostValue();
+        $post     = $observer->getRequest()->getPostValue();
         $category = $observer->getCategory();
-        if (!empty($post['merchandiser_category_products'])
-            && is_string($post['merchandiser_category_products'])
-            && !$category->getProductsReadonly()
-        ) {
-            $products = json_decode($post['merchandiser_category_products'], true);
+
+        if ($category->getProductsReadonly()) {
+            return;
+        }
+
+        if (empty($post['merchandiser_category_products'])) {
+            return;
+        }
+
+        if (is_string($post['merchandiser_category_products'])) {
+            $products = $this->_jsonHelper->jsonDecode($post['merchandiser_category_products']);
             $category->setPostedProducts($products);
         }
     }

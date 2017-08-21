@@ -1,9 +1,9 @@
 <?php
+
 namespace Diepxuan\Catalog\Model\ResourceModel\Merchandiser;
 
-use \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
-
-class Collection extends AbstractCollection {
+class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
+{
 
     protected $_idFieldName = \Diepxuan\Catalog\Model\Merchandiser::MERCHANDISER_ID;
 
@@ -12,7 +12,8 @@ class Collection extends AbstractCollection {
      *
      * @return void
      */
-    protected function _construct() {
+    protected function _construct()
+    {
         $this->_init('Diepxuan\Catalog\Model\Merchandiser', 'Diepxuan\Catalog\Model\ResourceModel\Merchandiser');
     }
 
