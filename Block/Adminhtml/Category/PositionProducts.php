@@ -1,21 +1,16 @@
 <?php
-/**
- * Copyright © 2016 Evolve.
- */
 
+/**
+ * Copyright © 2016 Dxvn.
+ */
 namespace Diepxuan\Catalog\Block\Adminhtml\Category;
 
-class AssignProducts extends \Magento\Backend\Block\Template
+class PositionProducts extends \Magento\Catalog\Block\Adminhtml\Category\AssignProducts
 {
 
-    // Block template
-    protected $_template = 'catalog/category/edit/assign_products.phtml';
+    protected $_template = 'catalog/category/edit/position_products.phtml';
     // Magento\Catalog\Block\Adminhtml\Category\Tab\Product
     protected $blockGrid;
-    // Magento\Framework\Registry
-    protected $registry;
-    // Magento\Framework\Json\EncoderInterface
-    protected $jsonEncoder;
     // Image
     protected $helperImage;
     // Pagination
@@ -39,10 +34,8 @@ class AssignProducts extends \Magento\Backend\Block\Template
         \Magento\Catalog\Helper\Image            $helperImage,
         array                                    $data = []
     ) {
-        $this->registry    = $registry;
-        $this->jsonEncoder = $jsonEncoder;
         $this->helperImage = $helperImage;
-        parent::__construct($context, $data);
+        parent::__construct($context, $registry, $jsonEncoder, $data);
     }
 
     protected function getCollection()
