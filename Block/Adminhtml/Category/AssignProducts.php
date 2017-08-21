@@ -68,8 +68,6 @@ class AssignProducts extends \Magento\Backend\Block\Template
                     'in_catalog' => \Magento\Catalog\Model\Product\Visibility::VISIBILITY_IN_CATALOG,
                     'in_search'  => \Magento\Catalog\Model\Product\Visibility::VISIBILITY_IN_SEARCH,
                 )))
-            // ->setPageSize($pageSize)
-            // ->setCurPage($page)
                 ->setOrder('position', 'ASC');
         }
         return $collections;
