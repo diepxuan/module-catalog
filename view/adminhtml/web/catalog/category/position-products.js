@@ -3,24 +3,24 @@
  * See COPYING.txt for license details.
  */
 
+/* global $, $H */
+
 define([
     'jquery',
     'jquery/ui'
-], function($) {
+], function(jQuery) {
     'use strict';
 
-    $.widget('mage.positionProducts', {
+    jQuery.widget('mage.positionProducts', {
 
-        options: {},
+        options: {
+            positionProducts: {}
+        },
 
         _create: function _create() {
-            var self = this;
+            this.positionProducts = $H(this.options.positionProducts);
 
-            $('[data-position-placeholder=content]', this.element).sortable({
-                update: function update(event, ui) {
-                    self._reindex();
-                }
-            });
+            var self = this;
 
             self._bindHtml();
         },
@@ -28,19 +28,36 @@ define([
         _reindex: function _reindex() {
             var self = this;
 
-            $('.admin__position-item', self.element).each(function(index, element) {
-                $('.admin__position-position', this).html(index + 1);
+            jQuery('.admin__position-item', self.element).each(function(index, element) {
+                var $position = index + 1;
+                var $id = jQuery('.admin__position-id', this).text().trim();
+                jQuery('.admin__position-position', this).html($position);
+
+                self.positionProducts.set($id, $position);
             });
+
+            self._reloadValue();
         },
 
         _bindHtml: function _bindHtml() {
             var self = this;
 
-            $('[data-position-action=reindex]', self.element).on('click', function reindex_click() {
+            jQuery('[data-position-placeholder=content]', self.element).sortable({
+                update: function update(event, ui) {
+                    self._reindex();
+                }
+            });
+
+            jQuery('[data-position-action=reindex]', self.element).on('click', function reindex_click() {
                 self._reindex();
             });
+        },
+
+        _reloadValue: function _reloadValue() {
+            jQuery('#in_position_products').val(Object.toJSON(this.positionProducts));
+            $('in_position_products').value = Object.toJSON(this.positionProducts);
         }
     });
 
-    return $.mage.positionProducts;
+    return jQuery.mage.positionProducts;
 });

@@ -5,6 +5,7 @@
 .admin__position-content {
     display: block;
     margin-left: -5px;
+    margin-top: 15px;
 }
 
 .admin__position-content:after {
