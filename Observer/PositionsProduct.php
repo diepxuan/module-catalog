@@ -2,7 +2,7 @@
 
 namespace Diepxuan\Catalog\Observer;
 
-class CatalogProductPosition implements \Magento\Framework\Event\ObserverInterface
+class PositionsProduct implements \Magento\Framework\Event\ObserverInterface
 {
     /**
      * @var \Magento\Framework\Json\Helper\Data
@@ -20,20 +20,14 @@ class CatalogProductPosition implements \Magento\Framework\Event\ObserverInterfa
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
-        $post     = $observer->getRequest()->getPostValue();
-        $category = $observer->getCategory();
+        $positionProducts = $observer->getRequest()->getPostValue('position_products', '{}');
+        $category         = $observer->getCategory();
 
         if ($category->getProductsReadonly()) {
             return;
         }
 
-        if (empty($post['merchandiser_category_products'])) {
-            return;
-        }
-
-        if (is_string($post['merchandiser_category_products'])) {
-            $products = $this->_jsonHelper->jsonDecode($post['merchandiser_category_products']);
-            $category->setPostedProducts($products);
-        }
+        $products = $this->_jsonHelper->jsonDecode($positionProducts);
+        $category->setPostedProducts($products);
     }
 }
