@@ -14,7 +14,7 @@ define([
         },
 
         _create: function() {
-            $('[data-position-placeholder=container]', this.element).sortable();
+            $('[data-position-placeholder=content]', this.element).sortable();
         }
     });
 

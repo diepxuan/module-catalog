@@ -95,26 +95,26 @@ class Position extends \Magento\Backend\Block\Widget\Grid\Extended
             'entity_id',
             [
                 'index'            => 'entity_id',
-                'column_css_class' => 'entity_id col-id',
-            ]
-        );
-        $this->addColumn('name',
-            [
-                'index'            => 'name',
-                'column_css_class' => 'name',
+                'column_css_class' => 'admin__position-id col-id',
             ]
         );
         $this->addColumn('thumbnail',
             [
                 'index'            => 'thumbnail',
-                'column_css_class' => 'thumbnail',
+                'column_css_class' => 'admin__position-thumbnail',
+            ]
+        );
+        $this->addColumn('name',
+            [
+                'index'            => 'name',
+                'column_css_class' => 'admin__position-name',
             ]
         );
         $this->addColumn(
             'position',
             [
                 'index'            => 'cat_index_position',
-                'column_css_class' => 'position',
+                'column_css_class' => 'admin__position-position',
             ]
         );
 
