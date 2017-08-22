@@ -2,6 +2,7 @@
  * Copyright © 2017 Dxvn, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 define([
     'jquery',
     'jquery/ui'
@@ -14,7 +15,7 @@ define([
         },
 
         _create: function() {
-            $('[data-position-placeholder=content]', this.element).sortable();
+            $('[data-position-placeholder=content]', this.element).sortable({});
         }
     });
 

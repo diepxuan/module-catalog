@@ -15,21 +15,15 @@
 
 .admin__position-item {
     border: 1px solid #cccccc;
+    cursor: move;
     display: block;
     float: left;
     height: 72px;
     margin-left: 5px;
     margin-top: 5px;
+    overflow: hidden;
     position: relative;
-    width: calc(100% / 4 - 5px);
-}
-
-.admin__position-item:nth-of-type(4n + 1) {
-    clear: left;
-}
-
-.admin__position-item:nth-of-type(4n + 8) {
-    clear: right;
+    width: calc(90% / 4 - 5px);
 }
 
 .admin__position-item:after {
@@ -62,8 +56,8 @@
 
 .admin__position-name {
     display: inline-block;
-    font-size: 13px;
-    line-height: 15px;
+    font-size: 14px;
+    line-height: 1.2;
     text-align: left;
     vertical-align: middle;
     width: calc(100% - 80px);
@@ -73,12 +67,12 @@
     background: #11bbaa;
     color: #ffffff;
     display: block;
-    font-size: 13px;
+    font-size: 12px;
     height: 20px;
-    left: -1px;
+    left: 0px;
     line-height: 20px;
     min-width: 20px;
     position: absolute;
     text-align: center;
-    top: -1px;
+    top: 0px;
 }
