@@ -9,20 +9,11 @@ class PositionProducts extends \Magento\Catalog\Block\Adminhtml\Category\AssignP
 {
 
     protected $_template = 'catalog/category/edit/position_products.phtml';
-    // Magento\Catalog\Block\Adminhtml\Category\Tab\Product
-    protected $blockGrid;
-    // Image
+
+    /**
+     * @var \Magento\Catalog\Helper\Image
+     */
     protected $helperImage;
-    // Pagination
-    protected $_paginationPageSizes = array(
-        20  => 20,
-        40  => 40,
-        60  => 60,
-        80  => 80,
-        100 => 100,
-        150 => 150,
-        200 => 200,
-    );
 
     /**
      * AssignProducts constructor.
@@ -36,6 +27,23 @@ class PositionProducts extends \Magento\Catalog\Block\Adminhtml\Category\AssignP
     ) {
         $this->helperImage = $helperImage;
         parent::__construct($context, $registry, $jsonEncoder, $data);
+    }
+
+    /**
+     * Retrieve instance of grid block
+     *
+     * @return \Magento\Framework\View\Element\BlockInterface
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function getBlockGrid()
+    {
+        if (null === $this->blockGrid) {
+            $this->blockGrid = $this->getLayout()->createBlock(
+                'Diepxuan\Catalog\Block\Adminhtml\Category\Tab\Position',
+                'category.product.position'
+            );
+        }
+        return $this->blockGrid;
     }
 
     protected function getCollection()
@@ -67,24 +75,16 @@ class PositionProducts extends \Magento\Catalog\Block\Adminhtml\Category\AssignP
     }
 
     /**
-     * Get category id
+     * @return interger
      */
     public function getCategoryId()
     {
-        $cate = $this->getCategory();
-        if (!is_null($cate)) {return $cate->getId();} else {return 0;}
+        return $this->getCategory()->getId();
     }
 
     /**
-     * Get category
-     */
-    public function getCategory()
-    {
-        return $this->registry->registry('category');
-    }
-
-    /**
-     * Get image product
+     * @param  [type] $product
+     * @return string
      */
     public function getImage($product)
     {
