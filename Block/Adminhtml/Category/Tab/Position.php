@@ -91,8 +91,7 @@ class Position extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     protected function _prepareColumns()
     {
-        $this->addColumn(
-            'entity_id',
+        $this->addColumn('entity_id',
             [
                 'index'            => 'entity_id',
                 'column_css_class' => 'admin__position-id col-id',
@@ -110,8 +109,7 @@ class Position extends \Magento\Backend\Block\Widget\Grid\Extended
                 'column_css_class' => 'admin__position-name',
             ]
         );
-        $this->addColumn(
-            'position',
+        $this->addColumn('position',
             [
                 'index'            => 'cat_index_position',
                 'column_css_class' => 'admin__position-position',
