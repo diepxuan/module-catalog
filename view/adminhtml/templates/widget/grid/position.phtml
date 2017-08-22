@@ -20,7 +20,8 @@
 <?php if ($block->getCollection()): ?>
 <div id="<?php echo $block->escapeHtml($block->getId()) ?>"
     data-position-id="<?php echo $block->escapeHtml($block->getId()) ?>">
-    <div class="admin__position-toolbar">
+    <div class="admin__position-toolbar"
+        data-position-placeholder="toolbar">
         <div class="admin__position-actions">
             <?php $countRecords = $block->getCollection()->getSize(); ?>
             <button class="admin__position-reindex" data-position-action="reindex">
@@ -30,7 +31,8 @@
             </button>
         </div>
     </div>
-    <div class="admin__position-container">
+    <div class="admin__position-container"
+        data-position-placeholder="container">
         <?php foreach ($block->getCollection() as $index => $_item) : ?>
         <div class="admin__position-item">
             <?php foreach ($block->getColumns() as $_column) :
