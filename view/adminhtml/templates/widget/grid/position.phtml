@@ -20,23 +20,34 @@
 <?php if ($block->getCollection()): ?>
 <div id="<?php echo $block->escapeHtml($block->getId()) ?>"
     data-position-id="<?php echo $block->escapeHtml($block->getId()) ?>">
-    <div class="evolve-retail-top-action">
-        <ul>
-            <li><button id="reindexAllProduct" ><span>set automatic</span></button></li>
-        </ul>
+    <div class="admin__position-toolbar">
+        <div class="admin__position-actions">
+            <?php $countRecords = $block->getCollection()->getSize(); ?>
+            <button class="admin__position-reindex" data-position-action="reindex">
+                <span>Reindex</span>
+                <?php /* @escapeNotVerified */ echo $countRecords; ?>
+                <span><?php /* @escapeNotVerified */ echo __('products'); ?></span>
+            </button>
+        </div>
     </div>
-    <div class="merchandiser-content">
-        <ul id="evolve-merchandiser" class="ui-sortable">
-            <?php foreach ($block->getCollection() as $index => $_item) : ?>
-            <li class="ui-sortable-handle evol-merchan-item">
-                <?php foreach ($block->getColumns() as $_column) : ?>
-                <div class="item <?php /* @escapeNotVerified */ echo $_column->getCssProperty() ?>">
-                    <?php echo(($_html = $_column->getRowField($_item)) != '' ? $_html : '&nbsp;') ?>
-                </div>
-                <?php endforeach; ?>
-            </li>
+    <div class="admin__position-container">
+        <?php foreach ($block->getCollection() as $index => $_item) : ?>
+        <div class="admin__position-item">
+            <?php foreach ($block->getColumns() as $_column) :
+                $prepareFunc = 'prepare' . ucfirst(strtolower($_column->getId()));
+                $_html       = $_column->getRowField($_item) ?: '&nbsp;';
+                $_class      = $_column->getCssProperty();
+            ?>
+            <div class="<?php /* @escapeNotVerified */ echo $_class; ?>">
+                <?php if (method_exists($block, $prepareFunc)) : ?>
+                    <?php /* @escapeNotVerified */ echo $block->$prepareFunc($_item); ?>
+                <?php else : ?>
+                    <span><?php /* @escapeNotVerified */ echo $_html; ?></span>
+                <?php endif; ?>
+            </div>
             <?php endforeach; ?>
-        </ul>
+        </div>
+        <?php endforeach; ?>
     </div>
 </div>
 <?php endif ?>

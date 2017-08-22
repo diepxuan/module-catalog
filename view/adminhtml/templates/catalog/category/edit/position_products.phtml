@@ -10,6 +10,7 @@
 $blockGrid = $block->getBlockGrid();
 ?>
 <?php  echo $block->getGridHtml(); ?>
+<input type="hidden" name="position_products" data-form-part="category_form" value="" />
 <script type="text/x-magento-init">
     {
         "[data-position-id=<?php /* @escapeNotVerified */ echo $block->escapeHtml($blockGrid->getId())  ?: ''; ?>]": {
