@@ -1,38 +1,23 @@
-<div class="evolveretail-merchandiser">
-    <div class="evolve-retail-top-action">
-        <ul>
-            <li><button id="reindexAllProduct" ><span>set automatic</span></button></li>
-        </ul>
-    </div>
-    <div class="merchandiser-content">
-        <ul id="evolve-merchandiser" class="ui-sortable">
-        <?php foreach ($block->getCollectionProducts() as $index => $product) : ?>
-            <li class="ui-sortable-handle evol-merchan-item" data-id="<?php echo $product->getEntityId()?>" data-index="<?php echo $index;?>" data-old="<?php echo $product->getCatIndexPosition()?>" data-new="<?php echo $product->getCatIndexPosition()?>">
-                <div class="item">
-                    <div class="position"><input type="text" name="merchandiser_item_position" class="merchandiser_item_position" value="<?php echo $product->getCatIndexPosition()?>"></div>
-                    <div class="image"><img src="<?php echo $block->getImage($product)?>" alt=""></div>
-                    <div class="info">
-                        <h3><?php echo $product->getName() ?></h3>
-                    </div>
-                </div>
-            </li>
-        <?php endforeach; ?>
-        </ul>
-        <input type="hidden" name="merchandiser_category_products" id="merchandiser_in_category_products" data-form-part="category_form" value="" />
-        <script type="text/javascript">
-            require.config({
-                deps: ['jquery', 'Diepxuan_Catalog_Dragula', 'Diepxuan_Catalog_Main'],
-                callback: function ($, dragula, evolMerchandiser) {
-                    'use strict';
-                    $('#evolve-merchandiser').evolMerchandiser(dragula, {
-                        updatePositionAction: "<?php echo $block->getUrl('diepxuan_catalog/product/updatePosition')?>",
-                        reindexAllAction: "<?php echo $block->getUrl('diepxuan_catalog/product/reindexall')?>",
-                        buttonReindex: '#reindexAllProduct',
-                        cateID: <?php echo $block->getCategoryId()?>,
-                        form_key: "<?php echo $block->getFormKey()?>"
-                    });
-                }
-            });
-        </script>
-    </div>
-</div>
+<?php
+/**
+ * Copyright © 2017 Dxvn, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Diepxuan\Catalog\Block\Adminhtml\Category\PositionProducts $block */
+
+/** @var \Diepxuan\Catalog\Block\Adminhtml\Category\Tab\Position $blockGrid */
+$blockGrid = $block->getBlockGrid();
+?>
+<?php  echo $block->getGridHtml(); ?>
+<script type="text/x-magento-init">
+    {
+        "[data-position-id=<?php /* @escapeNotVerified */ echo $block->escapeHtml($blockGrid->getId())  ?: ''; ?>]": {
+            "Diepxuan_Catalog/catalog/category/position-products": {}
+        }
+    }
+</script>
+<!-- @todo remove when "UI components" will support such initialization -->
+<script>
+    require('mage/apply/main').apply();
+</script>

@@ -6,85 +6,37 @@
 ?>
 <?php
 /**
- * Template for \Magento\Backend\Block\Widget\Grid
+ * Template for \Diepxuan\Catalog\Block\Adminhtml\Category\PositionProducts
  *
  *  getId()
  *  getCollection()
  *  getColumns()
- *  getPagerVisibility()
- *  getVarNamePage()
  */
-$numColumns = sizeof($block->getColumns());
 
 /**
- * @var \Magento\Backend\Block\Widget\Grid\Extended $block
+ * @var \Diepxuan\Catalog\Block\Adminhtml\Category\Tab\Position $block
  */
 ?>
 <?php if ($block->getCollection()): ?>
-<div id="<?php echo $block->escapeHtml($block->getId()) ?>" data-grid-id="<?php echo $block->escapeHtml($block->getId()) ?>">
-    <div class="admin__data-grid-wrap admin__data-grid-wrap-static">
-        <table class="data-grid" id="<?php echo $block->escapeHtml($block->getId()) ?>_table">
-            <tbody>
-            <?php if (($block->getCollection()->getSize() > 0) && (!$block->getIsCollapsed())): ?>
-                <?php foreach ($block->getCollection() as $_index => $_item): ?>
-                    <tr title="<?php /* @escapeNotVerified */ echo $block->getRowUrl($_item) ?>"<?php if ($_class = $block->getRowClass($_item)): ?>
-                        class="<?php /* @escapeNotVerified */ echo $_class; ?>"<?php endif; ?> ><?php
-                        $i = 0;
-                        foreach ($block->getColumns() as $_column):
-                            if ($block->shouldRenderCell($_item, $_column)):
-                                $_rowspan = $block->getRowspan($_item, $_column);
-                                ?>
-                            <td <?php echo($_rowspan ? 'rowspan="' . $_rowspan . '" ' : '') ?>
-                                class="<?php /* @escapeNotVerified */ echo $_column->getCssProperty() ?>
-                                        <?php /* @escapeNotVerified */ echo $_column->getId() == 'massaction' ? 'data-grid-checkbox-cell': ''?>">
-                                <?php echo(($_html = $_column->getRowField($_item)) != '' ? $_html : '&nbsp;') ?>
-                                </td><?php
-                                if ($block->shouldRenderEmptyCell($_item, $_column)):
-                                    ?>
-                                    <td colspan="<?php /* @escapeNotVerified */ echo $block->getEmptyCellColspan($_item) ?>"
-                                        class="last"><?php /* @escapeNotVerified */ echo $block->getEmptyCellLabel() ?></td><?php
-                                endif;
-                            endif;
-                        endforeach; ?>
-                    </tr>
-                    <?php if ($_multipleRows = $block->getMultipleRows($_item)): ?>
-                        <?php foreach ($_multipleRows as $_i): ?>
-                            <tr>
-                                <?php $i = 0;
-                                foreach ($block->getMultipleRowColumns($_i) as $_column): ?>
-                                    <td class="<?php /* @escapeNotVerified */ echo $_column->getCssProperty() ?>
-                                        <?php /* @escapeNotVerified */ echo $_column->getId() == 'massaction' ? 'data-grid-checkbox-cell': ''?>">
-                                        <?php echo(($_html = $_column->getRowField($_i)) != '' ? $_html : '&nbsp;') ?>
-                                    </td>
-                                <?php endforeach; ?>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-
-                    <?php if ($block->shouldRenderSubTotal($_item)): ?>
-                        <tr class="subtotals">
-                            <?php $i = 0;
-                            foreach ($block->getSubTotalColumns() as $_column): ?>
-                                <td class="<?php /* @escapeNotVerified */ echo $_column->getCssProperty() ?>
-                                           <?php /* @escapeNotVerified */ echo $_column->getId() == 'massaction' ? 'data-grid-checkbox-cell': ''?>">
-                                    <?php /* @escapeNotVerified */ echo($_column->hasSubtotalsLabel() ? $_column->getSubtotalsLabel() :
-                                        $_column->getRowField($block->getSubTotalItem($_item))
-                                    );
-                                    ?>
-                                </td>
-                            <?php endforeach; ?>
-                        </tr>
-                    <?php endif; ?>
+<div id="<?php echo $block->escapeHtml($block->getId()) ?>"
+    data-position-id="<?php echo $block->escapeHtml($block->getId()) ?>">
+    <div class="evolve-retail-top-action">
+        <ul>
+            <li><button id="reindexAllProduct" ><span>set automatic</span></button></li>
+        </ul>
+    </div>
+    <div class="merchandiser-content">
+        <ul id="evolve-merchandiser" class="ui-sortable">
+            <?php foreach ($block->getCollection() as $index => $_item) : ?>
+            <li class="ui-sortable-handle evol-merchan-item">
+                <?php foreach ($block->getColumns() as $_column) : ?>
+                <div class="item <?php /* @escapeNotVerified */ echo $_column->getCssProperty() ?>">
+                    <?php echo(($_html = $_column->getRowField($_item)) != '' ? $_html : '&nbsp;') ?>
+                </div>
                 <?php endforeach; ?>
-            <?php elseif ($block->getEmptyText()): ?>
-                <tr class="data-grid-tr-no-data">
-                    <td class="<?php /* @escapeNotVerified */ echo $block->getEmptyTextClass() ?>"
-                        colspan="<?php /* @escapeNotVerified */ echo $numColumns ?>"><?php /* @escapeNotVerified */ echo $block->getEmptyText() ?></td>
-                </tr>
-            <?php endif; ?>
-            </tbody>
-        </table>
-
+            </li>
+            <?php endforeach; ?>
+        </ul>
     </div>
 </div>
 <?php endif ?>

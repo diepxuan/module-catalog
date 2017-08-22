@@ -79,7 +79,7 @@ class PositionProducts extends \Magento\Catalog\Block\Adminhtml\Category\AssignP
      */
     public function getCategoryId()
     {
-        return $this->getCategory()->getId();
+        return $this->getCategory()->getId() ?: 0;
     }
 
     /**

@@ -6,7 +6,6 @@
 
 namespace Diepxuan\Catalog\Block\Adminhtml\Category\Tab;
 
-// class Position extends \Magento\Catalog\Block\Adminhtml\Category\Tab\Product
 class Position extends \Magento\Backend\Block\Widget\Grid\Extended
 {
     /**
@@ -92,21 +91,21 @@ class Position extends \Magento\Backend\Block\Widget\Grid\Extended
         $this->addColumn(
             'entity_id',
             [
-                'header'           => __('ID'),
-                'sortable'         => true,
                 'index'            => 'entity_id',
-                'header_css_class' => 'col-id',
-                'column_css_class' => 'col-id',
+                'column_css_class' => 'entity_id col-id',
             ]
         );
-        $this->addColumn('name', ['header' => __('Name'), 'index' => 'name']);
+        $this->addColumn('name',
+            [
+                'index'            => 'name',
+                'column_css_class' => 'name',
+            ]
+        );
         $this->addColumn(
             'position',
             [
-                'header'   => __('Position'),
-                'type'     => 'number',
-                'index'    => 'position',
-                'editable' => !$this->getCategory()->getProductsReadonly(),
+                'index'            => 'position',
+                'column_css_class' => 'position',
             ]
         );
 
