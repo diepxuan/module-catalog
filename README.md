@@ -9,8 +9,6 @@ Catalog amend
 --------------
 
 This extension amend the some feature to catalog for Magento 2.
-- ```1.0.0``` drag and drop to update products position in category.
-- ```1.1.0``` dropdown out of stock.
 
 
 Installation
