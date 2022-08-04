@@ -1,13 +1,19 @@
 {
     "name": "diepxuan/module-catalog",
-    "description": "Catalog amend for Magento 2",
+    "description": "Catalog for Magento 2",
+    "config": {
+        "sort-packages": true
+    },
     "require":
     {
-        "php": "~5.6.5|7.0.2|7.0.4|~7.0.6",
-        "magento/framework": "100.1.*"
+        "php": "~7.4.0||~8.1.0",
+        "magento/framework": "*",
+        "magento/module-backend": "*",
+        "magento/module-catalog": "*",
+        "magento/module-configurable-product": "*"
     },
     "type": "magento2-module",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "authors": [
     {
         "name": "Tran Ngoc Duc",
