@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright © 2017 Dxvn, Inc. All rights reserved.
  * See COPYING.txt for license details.
@@ -71,11 +72,20 @@ class Position extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     protected function _prepareCollection()
     {
-        $collection = $this->getCategory()->getProductCollection()
-            ->addCategoryFilter($this->getCategory())
+        if ($this->getCategory()->getId()) {
+            $this->setDefaultFilter(['in_category' => 1]);
+        }
+        $collection = $this->_productFactory->create()->getCollection()
             ->addAttributeToSelect('name')
             ->addAttributeToSelect('thumbnail')
-            ->addAttributeToSelect('position')
+            ->joinField(
+                'position',
+                'catalog_category_product',
+                'position',
+                'product_id=entity_id',
+                'category_id=' . (int)$this->getRequest()->getParam('id', 0),
+                'left'
+            )
             ->setOrder('position', 'ASC');
         $storeId = (int) $this->getRequest()->getParam('store', 0);
         if ($storeId > 0) {
@@ -91,25 +101,29 @@ class Position extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     protected function _prepareColumns()
     {
-        $this->addColumn('entity_id',
+        $this->addColumn(
+            'entity_id',
             [
                 'index'            => 'entity_id',
                 'column_css_class' => 'admin__position-id col-id',
             ]
         );
-        $this->addColumn('thumbnail',
+        $this->addColumn(
+            'thumbnail',
             [
                 'index'            => 'thumbnail',
                 'column_css_class' => 'admin__position-thumbnail',
             ]
         );
-        $this->addColumn('name',
+        $this->addColumn(
+            'name',
             [
                 'index'            => 'name',
                 'column_css_class' => 'admin__position-name',
             ]
         );
-        $this->addColumn('position',
+        $this->addColumn(
+            'position',
             [
                 'index'            => 'cat_index_position',
                 'column_css_class' => 'admin__position-position',
@@ -139,7 +153,8 @@ class Position extends \Magento\Backend\Block\Widget\Grid\Extended
             ]
         );
 
-        return sprintf('<img src="%s" alt="%s" />',
+        return sprintf(
+            '<img src="%s" alt="%s" />',
             $_src,
             $_alt
         );
